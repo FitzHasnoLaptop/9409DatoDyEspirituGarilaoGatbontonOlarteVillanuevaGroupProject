@@ -25,7 +25,13 @@ public class MyProgram {
                 "Residency", "District", "Gender"
         };
 
-        DefaultTableModel tableModel = new DefaultTableModel(columns, 0);
+        // Overriding isCellEditable to return false makes the entire table read-only
+        DefaultTableModel tableModel = new DefaultTableModel(columns, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         JTable table = new JTable(tableModel);
         JScrollPane tableScroll = new JScrollPane(table);
 
