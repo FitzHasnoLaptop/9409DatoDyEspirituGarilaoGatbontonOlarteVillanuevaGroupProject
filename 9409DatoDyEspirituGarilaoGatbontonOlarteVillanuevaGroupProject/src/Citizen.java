@@ -1,4 +1,4 @@
-public class Citizen {
+public class Citizen implements Comparable<Citizen> {
     private String fullName;
     private String email;
     private String address;
