@@ -175,23 +175,38 @@ public class MyProgram {
             }
         });
 
-        //Display names by district
+        // Display names by district
         districtBtn.addActionListener(e -> {
             try {
-                int district = Integer.parseInt(districtField.getText().trim());
+                String input = districtField.getText().trim();
+                if (input.isEmpty()) {
+                    JOptionPane.showMessageDialog(frame, "Please enter a district number.");
+                    return;
+                }
+                int district = Integer.parseInt(input);
+
                 displayCitizens.accept(listFilters.getDistrictCitizens(district));
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(frame, "Enter a valid district number.");
+                JOptionPane.showMessageDialog(frame, "Enter a valid integer for the district number.");
             }
         });
 
-        //Display residents and non-residents
+// Display residents
         residentsBtn.addActionListener(e -> {
+
             displayCitizens.accept(listFilters.getResidentCitizens());
         });
 
+// Display non-residents
         nonResidentsBtn.addActionListener(e -> {
+
             displayCitizens.accept(listFilters.getNonResidentCitizens());
+        });
+
+// Display P.O. Box
+        poBoxBtn.addActionListener(e -> {
+
+            displayCitizens.accept(listFilters.getPOBoxCitizens());
         });
 
         //Create new citizen
