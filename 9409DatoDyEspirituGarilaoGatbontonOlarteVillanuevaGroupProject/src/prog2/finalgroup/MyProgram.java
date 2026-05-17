@@ -64,6 +64,8 @@ public class MyProgram {
         leftPanel.add(Box.createVerticalStrut(15));
 
         JTextField nameField = new JTextField();
+        nameField.setMaximumSize(new Dimension(Integer.MAX_VALUE, nameField.getPreferredSize().height));
+        nameField.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         //finding the name of the citizen
         JButton findNameBtn = new JButton("1. Find Name");
@@ -79,6 +81,8 @@ public class MyProgram {
         leftPanel.add(Box.createVerticalStrut(20));
 
         JTextField districtField = new JTextField();
+        districtField.setMaximumSize(new Dimension(Integer.MAX_VALUE, districtField.getPreferredSize().height));
+        districtField.setAlignmentX(Component.LEFT_ALIGNMENT);
         JButton districtBtn = new JButton("3. Display by District");
 
         //enter the District number of the citizen you're looking for
@@ -87,23 +91,25 @@ public class MyProgram {
         leftPanel.add(districtBtn);
         leftPanel.add(Box.createVerticalStrut(20));
 
+
         //the buttons to display residents and non-residents
         JButton residentsBtn = new JButton("4. Display Residents");
-        JButton nonResidentsBtn = new JButton("4. Display Non-Residents");
+        JButton nonResidentsBtn = new JButton("5. Display Non-Residents");
 
         leftPanel.add(residentsBtn);
         leftPanel.add(nonResidentsBtn);
         leftPanel.add(Box.createVerticalStrut(20));
 
         //the choice to add a new citizen to the csv and display the P.O. box
-        JButton addCitizenBtn = new JButton("5. Create New Citizen");
-        JButton poBoxBtn = new JButton("6. Display P.O. Box");
+        JButton addCitizenBtn = new JButton("6. Create New Citizen");
+        JButton poBoxBtn = new JButton("7. Display P.O. Box");
         JButton resetBtn = new JButton("Reset Table");
 
         leftPanel.add(addCitizenBtn);
         leftPanel.add(poBoxBtn);
         leftPanel.add(Box.createVerticalStrut(20));
         leftPanel.add(resetBtn);
+        leftPanel.add(Box.createVerticalGlue());
 
         //Find name
         findNameBtn.addActionListener(e -> {
