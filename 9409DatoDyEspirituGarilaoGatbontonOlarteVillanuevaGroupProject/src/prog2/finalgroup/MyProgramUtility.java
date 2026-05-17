@@ -12,30 +12,36 @@ public class MyProgramUtility {
     public List<Citizen> citizens; // list of all citizens
 
     //constructors
+
     public MyProgramUtility() {
         inputFile = new File("data.csv");
-        try {
-            fileReader = new Scanner(inputFile);
-        } catch (FileNotFoundException e) {
-            System.out.print("Error. File not found");
-        }
-        citizens = new ArrayList<>(); //initialize before adding
+        citizens = new ArrayList<>();
 
-        //make list of citizens
-        while(fileReader.hasNext()){
-            String line = fileReader.nextLine();
-            //initialization of variables
-            String[] cells = line.split(",(?=([^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*$)");
-            String name = cells[0] + " " + cells [1];
-            String email = cells[2];
-            String address = cells[3];
-            int age = Integer.parseInt(cells[4]);
-            boolean isResident = cells[5].equalsIgnoreCase("Resident"); //if else determines if they are a resident or not
-            int district = Integer.parseInt(cells[6]);
-            char gender = cells[7].equalsIgnoreCase("Male") ? 'M' : 'F';
-            //contructor of citizen and adding to the list
-            Citizen currentCitizen = new Citizen(name, email, address, age, isResident, district, gender);
-            citizens.add(currentCitizen);
+        try (Scanner fileReader = new Scanner(inputFile)) { // Using try-with-resources to automatically close the file
+            while (fileReader.hasNextLine()) {
+                String line = fileReader.nextLine().trim();
+                if (line.isEmpty()) continue; // Skip empty rows
+
+                // Split by comma, ignoring commas inside quotes
+                String[] cells = line.split(",(?=([^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*$)");
+
+                if (cells.length >= 8) {
+                    String name = cells[0].trim() + " " + cells[1].trim();
+                    String email = cells[2].trim();
+                    String address = cells[3].trim().replace("\"", ""); // Clear quotes from address
+                    int age = Integer.parseInt(cells[4].trim());
+                    boolean isResident = cells[5].trim().equalsIgnoreCase("Resident");
+                    int district = Integer.parseInt(cells[6].trim());
+                    char gender = cells[7].trim().equalsIgnoreCase("Male") ? 'M' : 'F';
+
+                    Citizen currentCitizen = new Citizen(name, email, address, age, isResident, district, gender);
+                    citizens.add(currentCitizen);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: data.csv file not found. Ensure it is in the project root directory.");
+        } catch (Exception e) {
+            System.out.println("Error parsing CSV data: " + e.getMessage());
         }
     }
 
