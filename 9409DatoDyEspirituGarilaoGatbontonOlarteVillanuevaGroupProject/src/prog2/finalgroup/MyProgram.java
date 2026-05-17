@@ -9,13 +9,7 @@ import java.util.stream.Collectors;
 public class MyProgram {
     public static void main(String[] args){
         MyProgramUtility listFilters = new MyProgramUtility();
-        /*to do:
-        GUI -mock up, fitz can edit the gui again kung gusto magdagdag pa or bawasan
-        Citizen class -DONE
-        MyProgramUtility class -IN PROGRESS
 
-        Note: Fitz or who ever is doing gui, learn a little bit on how to use streams and list, theyre kinda like a more complicated array
-         */
 
         JFrame frame = new JFrame("Citizen Information System");
         frame.setSize(1200, 700);
@@ -59,9 +53,8 @@ public class MyProgram {
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
         leftPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
-        JLabel featureTitle = new JLabel("FEATURES");
-        leftPanel.add(featureTitle);
-        leftPanel.add(Box.createVerticalStrut(15));
+
+
 
         JTextField nameField = new JTextField();
         nameField.setMaximumSize(new Dimension(Integer.MAX_VALUE, nameField.getPreferredSize().height));
